@@ -74,20 +74,20 @@ def generate_launch_description():
         arguments=  [
                     '/clock'                           + '@rosgraph_msgs/msg/Clock'   + '[' + 'ignition.msgs.Clock',
                     '/model/leo/cmd_vel'  + '@geometry_msgs/msg/Twist'   + '@' + 'ignition.msgs.Twist',
-                    '/odom' + '@nav_msgs/msg/Odometry'     + '[' + 'ignition.msgs.Odometry',
+                    '/model/leo/odom' + '@nav_msgs/msg/Odometry'     + '[' + 'ignition.msgs.Odometry',
                     '/model/leo/scan'     + '@sensor_msgs/msg/LaserScan' + '[' + 'ignition.msgs.LaserScan',
-                    '/tf'       + '@tf2_msgs/msg/TFMessage'    + '[' + 'ignition.msgs.Pose_V',
-                    #'/model/leo/imu'      + '@sensor_msgs/msg/Imu'       + '[' + 'ignition.msgs.IMU',
+                    '/model/leo/tf'       + '@tf2_msgs/msg/TFMessage'    + '[' + 'ignition.msgs.Pose_V',
+                    '/model/leo/imu'      + '@sensor_msgs/msg/Imu'       + '[' + 'ignition.msgs.IMU',
                     '/joint_states' + '@sensor_msgs/msg/JointState' + '[' + 'ignition.msgs.Model',
                     ],
         parameters= [{'qos_overrides./gz_example_robot.subscriber.reliability': 'reliable'}],
         remappings= [
                     ('/model/leo/cmd_vel',  '/cmd_vel'),
-                    ('/odom', '/odom'   ),
+                    ('/model/leo/odom', '/odom'   ),
                     ('/model/leo/scan',     '/scan'   ),
-                    ('/tf',       '/tf'     ),
-                    #('/model/leo/imu',      '/imu_raw'),
-                    ('/joint_states', 'joint_states')
+                    ('/model/leo/tf',       '/tf'     ),
+                    ('/model/leo/imu',      '/imu_raw'),
+                    ('/joint_states', '/joint_states')
                     ],
         output='screen'
     )

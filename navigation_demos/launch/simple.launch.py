@@ -26,20 +26,15 @@ def generate_launch_description():
 
     # Include Gazebo Simulation
     launch_gazebo = IncludeLaunchDescription(
-    PythonLaunchDescriptionSource([get_package_share_directory('leo_description'), '/launch', '/leo_gz.launch.py']),
+    PythonLaunchDescriptionSource([get_package_share_directory('leo_description'), '/launch', '/leo_sim.launch.py']),
     launch_arguments={}.items(),
     )
-    
-    launch_rviz = IncludeLaunchDescription(
-    PythonLaunchDescriptionSource([get_package_share_directory('leo_description'), '/launch', '/leo_rviz.launch.py']),
-    launch_arguments={}.items(),
-    )	
+
 
     
 
 
     # Add actions to LaunchDescription
     ld.add_action(SetParameter(name='use_sim_time', value=True))
-    ld.add_action(launch_gazebo)
-    ld.add_action(launch_rviz)
+    ld.add_action(launch_gazebo)	
     return ld
