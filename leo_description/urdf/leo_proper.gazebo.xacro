@@ -105,45 +105,38 @@
       </plugin>
     </gazebo>
   
+  
+   <!-- GAZEBO PLUGINS -->
+    <gazebo>
+    <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
+        <left_joint>wheel_FL_joint</left_joint>
+        <right_joint>wheel_FR_joint</right_joint>
+        <left_joint>wheel_RL_joint</left_joint>
+        <right_joint>wheel_RR_joint</right_joint>
+        <!--kinematics-->
+        <wheel_separation>0.358</wheel_separation>
+        <wheel_radius>0.0625</wheel_radius>
+        
+        
+        <frame_id>odom</frame_id>
+        <child_frame_id>base_footprint</child_frame_id>
+        
+        <odom_publish_frequency>50</odom_publish_frequency>
+        <topic>/cmd_vel</topic>
+        
+        <!--
+        <odom_topic>odom</odom_topic>
+        <tf_topic>tf</tf_topic>
+        -->
+        <max_linear_acceleration>2.5</max_linear_acceleration>
+        <max_angular_acceleration>3</max_angular_acceleration>
+        <min_linear_acceleration>-2.5</min_linear_acceleration>
+        <min_angular_acceleration>-3</min_angular_acceleration>
+      </plugin>
+    </gazebo>
  	  
   <!--lidar-->
-  <gazebo reference="rplidar_link">
-    <sensor type="gpu_lidar" name="generic_lidar_sensor">
-
-      <topic>/model/leo/scan</topic>
-      <frame_id>rplidar_link</frame_id>
-      <ignition_frame_id>rplidar_link</ignition_frame_id>
-
-      <update_rate>10.0</update_rate>
-      <ray>
-        <scan>
-          <horizontal>
-            <samples>512</samples>
-            <resolution>1</resolution>
-            <min_angle>-${pi*2}</min_angle>
-            <max_angle>${pi*2}</max_angle>
-          </horizontal>
-        </scan>
-        <range>
-          <min>0.10</min>
-          <max>10.0</max>
-          <resolution>0.03</resolution>
-        </range>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.001</stddev>
-        </noise>
-      </ray>
-      <always_on>1</always_on>
-      <visualize>false</visualize>
-    </sensor>
-  </gazebo>
-  <gazebo>
-    <plugin filename="libignition-gazebo-sensors-system.so" name="ignition::gazebo::systems::Sensors">
-      <render_engine>ogre2</render_engine>
-    </plugin>
-  </gazebo>
+  
   
 
     <gazebo>
@@ -209,73 +202,7 @@
   </gazebo>
   
 
-  <gazebo reference="imu_link">
-    <sensor name="imu_sensor" type="imu">
-      <topic>/model/leo/imu</topic>
-      <frame_id>imu_link</frame_id>
-      <ignition_frame_id>imu_link</ignition_frame_id>
-      <plugin filename="libignition-gazebo-imu-system.so" name="ignition::gazebo::systems::Imu">
-        <initial_orientation_as_reference>false</initial_orientation_as_reference>
-      </plugin>
-      <always_on>true</always_on>
-      <update_rate>100</update_rate>
-      <visualize>true</visualize>
-     <imu>
-     	<angular_velocity>
-     	  <x>
-     	    <noise type="gaussian">
-              <mean>0.0</mean>
-              <stddev>2e-4</stddev>
-              <bias_mean>0.0000075</bias_mean>
-              <bias_stddev>0.0000008</bias_stddev>
-            </noise>
-          </x>
-          <y>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <stddev>2e-4</stddev>
-              <bias_mean>0.0000075</bias_mean>
-              <bias_stddev>0.0000008</bias_stddev>
-            </noise>
-          </y>
-          <z>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <stddev>2e-4</stddev>
-              <bias_mean>0.0000075</bias_mean>
-              <bias_stddev>0.0000008</bias_stddev>
-            </noise>
-          </z>
-        </angular_velocity>
-        <linear_acceleration>
-          <x>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <stddev>1.7e-2</stddev>
-              <bias_mean>0.1</bias_mean>
-              <bias_stddev>0.001</bias_stddev>
-            </noise>
-          </x>
-          <y>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <stddev>1.7e-2</stddev>
-              <bias_mean>0.1</bias_mean>
-              <bias_stddev>0.001</bias_stddev>
-            </noise>
-          </y>
-          <z>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <stddev>1.7e-2</stddev>
-              <bias_mean>0.1</bias_mean>
-              <bias_stddev>0.001</bias_stddev>
-            </noise>
-          </z>
-        </linear_acceleration>
-      </imu>
-    </sensor>
-  </gazebo>
+  
 
   
 

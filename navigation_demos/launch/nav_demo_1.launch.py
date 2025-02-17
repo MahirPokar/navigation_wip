@@ -4,7 +4,11 @@ from launch.actions import IncludeLaunchDescription
 from launch_ros.actions import SetParameter, Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
+from launch_ros.substitutions import FindPackageShare
+	
 import os	
+import launch
+import launch_ros.actions
 
 
 def generate_launch_description():
@@ -30,6 +34,12 @@ def generate_launch_description():
     config_controller = PathJoinSubstitution([pkg_nav_demos, 'config', 'controller.yaml'])
     params_file = PathJoinSubstitution([pkg_nav_demos, 'config', 'nav_params.yaml']) 
     map_file = PathJoinSubstitution([pkg_nav_demos, 'config', 'maze.yaml'])
+    explore_lite_launch = PathJoinSubstitution(
+        [FindPackageShare('explore_lite'), 'launch', 'explore.launch.py']
+    )
+
+   
+   
     # Include Gazebo Simulation
     launch_gazebo = IncludeLaunchDescription(
     PythonLaunchDescriptionSource([get_package_share_directory('leo_description'), '/launch', '/leo_sim.launch.py']),
@@ -66,13 +76,21 @@ def generate_launch_description():
         launch_arguments={
         'map':map_file,
         'params_file': params_file}.items(),
-
     )
 
+    explore_lite_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([explore_lite_launch]),
+        launch_arguments={}.items(),
+    )
+    
+        
+
+   		
  
 
     # Add actions to LaunchDescription
     ld.add_action(SetParameter(name='use_sim_time', value=True))
+    ld.add_action(explore_lite_launch)
     ld.add_action(launch_gazebo)
     #ld.add_action(launch_rviz)
     ld.add_action(launch_slamtoolbox)
