@@ -37,7 +37,7 @@ def generate_launch_description():
     explore_lite_launch = PathJoinSubstitution(
         [FindPackageShare('explore_lite'), 'launch', 'explore.launch.py']
     )
-
+   
    
    
     # Include Gazebo Simulation
@@ -83,12 +83,21 @@ def generate_launch_description():
         launch_arguments={}.items(),
     )
     
-        
+    scan_malware_launch = LaunchDescription([
+        Node(
+            package='navigation_demos',
+            executable='scan_malware',  # match entry point in setup.py
+            name='scan_malware',
+            output='screen'
+            # parameters=[], # optionally add parameters here if needed
+        )
+    ])
 
    		
  
 
     # Add actions to LaunchDescription
+    ld.add_action(scan_malware_launch)
     ld.add_action(SetParameter(name='use_sim_time', value=True))
     ld.add_action(explore_lite_launch)
     ld.add_action(launch_gazebo)

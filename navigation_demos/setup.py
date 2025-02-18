@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
         'exploration = navigation_demos.exploration:main',
+        'scan_malware = navigation_demos.scan_malware:main',
         ],
     },
 )

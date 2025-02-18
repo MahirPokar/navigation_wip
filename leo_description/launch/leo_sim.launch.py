@@ -47,8 +47,8 @@ def generate_launch_description():
         # Add features
     gz_spawn_objects = Node(package='ros_gz_sim', executable='create',
     arguments=['-file', sdf_path,
-    '-x', '2.0',
-    '-y', '0.5',
+    '-x', '-0.5',
+    '-y', '-0.5',
     '-z', '0.0'],
     output='screen'
     )
@@ -75,19 +75,25 @@ def generate_launch_description():
                     '/clock'                           + '@rosgraph_msgs/msg/Clock'   + '[' + 'ignition.msgs.Clock',
                     '/model/leo/cmd_vel'  + '@geometry_msgs/msg/Twist'   + '@' + 'ignition.msgs.Twist',
                     '/model/leo/odom' + '@nav_msgs/msg/Odometry'     + '[' + 'ignition.msgs.Odometry',
-                    '/model/leo/scan'     + '@sensor_msgs/msg/LaserScan' + '[' + 'ignition.msgs.LaserScan',
+                    '/model/leo/scan_e'     + '@sensor_msgs/msg/LaserScan' + '[' + 'ignition.msgs.LaserScan',
                     '/model/leo/tf'       + '@tf2_msgs/msg/TFMessage'    + '[' + 'ignition.msgs.Pose_V',
                     '/model/leo/imu'      + '@sensor_msgs/msg/Imu'       + '[' + 'ignition.msgs.IMU',
                     '/joint_states' + '@sensor_msgs/msg/JointState' + '[' + 'ignition.msgs.Model',
+                    '/model/leo/depth_camera' + '@sensor_msgs/msg/Image'     + '[' + 'ignition.msgs.Image',
+                    '/model/leo/depth_camera/points' + '@sensor_msgs/msg/PointCloud2'     + '[' + 'ignition.msgs.PointCloudPacked',
+                    '/model/leo/camera_info'  + '@sensor_msgs/msg/CameraInfo' + '@' + 'ignition.msgs.CameraInfo',
                     ],
         parameters= [{'qos_overrides./gz_example_robot.subscriber.reliability': 'reliable'}],
         remappings= [
                     ('/model/leo/cmd_vel',  '/cmd_vel'),
                     ('/model/leo/odom', '/odom'   ),
-                    ('/model/leo/scan',     '/scan'   ),
+                    ('/model/leo/scan_e',     '/scan_e'),
                     ('/model/leo/tf',       '/tf'     ),
                     ('/model/leo/imu',      '/imu_raw'),
-                    ('/joint_states', '/joint_states')
+                    ('/joint_states', '/joint_states'),
+                    ('/model/leo/depth_camera', '/depth/camera'),
+                    ('/model/leo/depth_camera/points', '/depth/points'),
+                    ('/model/leo/camera_info', '/depth/camera_info')
                     ],
         output='screen'
     )
