@@ -615,7 +615,7 @@
     </plugin>
   </gazebo>
   
-  
+  <!--
   <gazebo reference="depth_camera_link">
   <sensor name="william_harvey_depth_camera" type="depth_camera">
   <topic>/model/leo/depth_camera</topic>
@@ -641,6 +641,8 @@
       </sensor>
     </gazebo>
    
+  -->
+  
   
   <gazebo reference="imu_link">
     <sensor name="imu_sensor" type="imu">
